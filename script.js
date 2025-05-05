@@ -88,11 +88,11 @@ function showImage(category) {
             document.getElementById("subtitle").textContent = "Καφέδες";
             }
             else if (category === 'drinks') {
-            document.getElementById("subtitle").textContent = "Ποτά (Γενικά)";
+            document.getElementById("subtitle").textContent = "Αναψυκτικά";
         }   else if (category === 'sandwich') {
-            document.getElementById("subtitle").textContent = "Σάντουιτς / Τοστ";
+            document.getElementById("subtitle").textContent = "Σάντουιτς";
         }   else if (category === 'pastry') {
-            document.getElementById("subtitle").textContent = "Γλυκά";
+            document.getElementById("subtitle").textContent = "Σφολιάτες";
         }
     }
         else if(getCookie('preferred_language') === 'english') {
@@ -103,7 +103,7 @@ function showImage(category) {
             }   else if (category === 'sandwich') {
                 document.getElementById("subtitle").textContent = "Sandwiches";
             }   else if (category === 'pastry') {
-                document.getElementById("subtitle").textContent = "Pastrys";
+                document.getElementById("subtitle").textContent = "Pastries";
             }
         }
       }
