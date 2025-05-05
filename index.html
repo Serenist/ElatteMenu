@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-latte Coffee & Snack Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Add Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Update body background with a warmer gradient */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe8d6 0%, #f5e6e8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Add subtle coffee-themed background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    /* Update header container with a coffee-themed gradient */
+    .header-container {
+      width: 100%;
+      padding: 30px 20px;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, rgba(255,248,240,0.95) 0%, rgba(255,241,230,0.85) 100%);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 30px rgba(139, 69, 19, 0.1);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      color: #2c3e50;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      margin: 0;
+      position: relative;
+    }
+
+    /* Update title gradient */
+    #title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+
+    #subtitle {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #34495e;
+      opacity: 0.9;
+    }
+
+    /* Update decorative elements */
+    .header-container::before,
+    .header-container::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #8B4513, transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .header-container::before {
+      top: 85px;
+    }
+
+    .header-container::after {
+      bottom: 20px;
+    }
+
+    /* Update menu buttons with warm colors */
+    .menu-button {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      margin: 15px 0;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff5e6 0%, #fff9f0 100%);
+      color: #6B4423;
+      border: 1px solid rgba(139, 69, 19, 0.1);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
+      background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+      border-color: rgba(139, 69, 19, 0.2);
+    }
+
+    .menu-image {
+      margin-top: 20px;
+      width: 95vw;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      display: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Update back button */
+    .back-button {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      padding: 15px;
+      font-size: 24px;
+      background: linear-gradient(135deg, #fff5e6 0%, #fff9f0 100%);
+      border: none;
+      border-radius: 50%;
+      color: #6B4423;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+      background: #fff;
+    }
+
+    /* Update language switcher */
+    .language-switch {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: linear-gradient(135deg, #fff5e6 0%, #fff9f0 100%);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .language-button {
+      padding: 10px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 12px;
+    }
+
+    .language-button:hover {
+      transform: scale(1.1);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .fi {
+      font-size: 30px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
+
+    /* Add subtle animation for content */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #menu-buttons {
+      animation: fadeIn 0.6s ease-out;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <h1 id="title">E-latte Snack & Coffee</h1>
+    <h1 id="subtitle">Menu</h1>
+  </div>
+
+  <div id="menu-buttons">
+    <button class="menu-button" id="coffee" onclick="showImage('coffee')">☕ Coffee</button>
+    <button class="menu-button" id="drinks" onclick="showImage('drinks')">🥤 Drinks (General)</button>
+    <button class="menu-button" id="sandwich" onclick="showImage('sandwich')">🥪 Sandwich / Toast</button>
+    <button class="menu-button" id="pastry" onclick="showImage('pastry')">🥐 Pastry</button>
+  </div>
+
+  <img id="menu-image" class="menu-image" alt="Menu Image">
+  <button id="back-button" class="back-button" onclick="goBack()">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+
+  <div class="language-switch">
+    <button class="language-button" onclick="switchToGreek()">
+      <span class="fi fi-gr"></span>
+    </button>
+    <button class="language-button" onclick="switchToEnglish()">
+      <span class="fi fi-gb"></span>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', loadPreferredLanguage);
+  </script>
+</body>
+</html>
+
+
+
