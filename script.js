@@ -106,10 +106,7 @@ function showImage(category) {
                 document.getElementById("subtitle").textContent = "Pastries";
             }
         }
-      }
-
-    // Add a new history entry
-    window.history.pushState({ action: 'showImage' }, '', '');
+    }
 }
 
 function goBack() {
@@ -129,21 +126,3 @@ function goBack() {
     menuButtons.style.display = "block"; // Show the menu buttons
     backButton.style.display = "none"; // Hide the back button
 }
-
-window.addEventListener('popstate', function(event) {
-    const imageElement = document.getElementById("menu-image");
-    const menuButtons = document.getElementById("menu-buttons");
-    const backButton = document.getElementById("back-button");
-
-    // Reset subtitle to default based on language preference
-    const preferred = getCookie('preferred_language');
-    if (preferred === 'greek') {
-        document.getElementById("subtitle").textContent = translations.greek.title;
-    } else {
-        document.getElementById("subtitle").textContent = translations.english.title;
-    }
-
-    imageElement.style.display = "none";
-    menuButtons.style.display = "block";
-    backButton.style.display = "none";
-});
