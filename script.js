@@ -20,17 +20,17 @@ function getCookie(name) {
 const translations = {
     english: {
       title: "Menu",
-      coffee: "☕ Coffee",
-      drinks: "🥤 Drinks (General)",
-      sandwich: "🥪 Sandwich / Toast",
-      pastry: "🥐 Pastry"
+      coffee: "☕ Coffees",
+      drinks: "🥤 Beverages",
+      sandwich: "🥪 Sandwiches",
+      pastry: "🥐 Pastries"
     },
     greek: {
       title: "Μενού",
-      coffee: "☕ Καφές",
-      drinks: "🥤 Ποτά (Γενικά)",
-      sandwich: "🥪 Σάντουιτς / Τοστ",
-      pastry: "🥐 Γλυκά"
+      coffee: "☕ Καφέδες",
+      drinks: "🥤 Αναψυκτικά",
+      sandwich: "🥪 Σάντουιτς",
+      pastry: "🥐 Σφολιάτες"
     }
   };
   
