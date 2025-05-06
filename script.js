@@ -17,18 +17,25 @@ function getCookie(name) {
     return null;
 }
 
+function hideBackButton() {
+    const backButton = document.getElementById("back-button");
+    if (backButton) {
+        backButton.style.display = "none";
+    }
+}
+
 const translations = {
     english: {
       title: "Menu",
       coffee: "☕ Coffees",
-      drinks: "🥤 Beverages",
+      beverages: "🥤 Beverages",
       sandwich: "🥪 Sandwiches",
       pastry: "🥐 Pastries"
     },
     greek: {
       title: "Μενού",
       coffee: "☕ Καφέδες",
-      drinks: "🥤 Αναψυκτικά",
+      beverages: "🥤 Αναψυκτικά",
       sandwich: "🥪 Σάντουιτς",
       pastry: "🥐 Σφολιάτες"
     }
@@ -38,7 +45,7 @@ const translations = {
     const lang = translations.english;
     document.getElementById("subtitle").textContent = lang.title;
     document.getElementById("coffee").textContent = lang.coffee;
-    document.getElementById("drinks").textContent = lang.drinks;
+    document.getElementById("beverages").textContent = lang.beverages;
     document.getElementById("sandwich").textContent = lang.sandwich;
     document.getElementById("pastry").textContent = lang.pastry;
     setCookie('preferred_language', 'english', 30); // Store preference for 30 days
@@ -48,27 +55,45 @@ function switchToGreek() {
     const lang = translations.greek;
     document.getElementById("subtitle").textContent = lang.title;
     document.getElementById("coffee").textContent = lang.coffee;
-    document.getElementById("drinks").textContent = lang.drinks;
+    document.getElementById("beverages").textContent = lang.beverages;
     document.getElementById("sandwich").textContent = lang.sandwich;
     document.getElementById("pastry").textContent = lang.pastry;
     setCookie('preferred_language', 'greek', 30); // Store preference for 30 days
 }
 
-// Add this function to load the preferred language on page load
+// Modify the loadPreferredLanguage function
 function loadPreferredLanguage() {
+    // Force scroll to top
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Reset scroll position
+    window.scrollTo(0, 0);
+
     const preferred = getCookie('preferred_language');
     if (preferred === 'greek') {
         switchToGreek();
     } else if (preferred === 'english') {
         switchToEnglish();
     }
-    // If no preference is stored, keep default language
+    // Hide back button on page load
+    hideBackButton();
+    // Hide menu image on page load
+    const imageElement = document.getElementById("menu-image");
+    if (imageElement) {
+        imageElement.style.display = "none";
+    }
+    // Show menu buttons on page load
+    const menuButtons = document.getElementById("menu-buttons");
+    if (menuButtons) {
+        menuButtons.style.display = "flex";
+    }
 }
 
 // Map categories to Google Drive image links
 const imageLinks = {
     coffee: "./Coffees.jpg",
-    drinks: "./Dark Black Chalkboard Texture Coffee Shop Menu.jpg",
+    beverages: "./Dark Black Chalkboard Texture Coffee Shop Menu.jpg",
     sandwich: "./Dark Black Chalkboard Texture Coffee Shop Menu.jpg",
     pastry: "./Dark Black Chalkboard Texture Coffee Shop Menu.jpg"
 };
@@ -87,7 +112,7 @@ function showImage(category) {
         if (category === 'coffee') {
             document.getElementById("subtitle").textContent = "Καφέδες";
             }
-            else if (category === 'drinks') {
+            else if (category === 'beverages') {
             document.getElementById("subtitle").textContent = "Αναψυκτικά";
         }   else if (category === 'sandwich') {
             document.getElementById("subtitle").textContent = "Σάντουιτς";
@@ -98,8 +123,8 @@ function showImage(category) {
         else if(getCookie('preferred_language') === 'english') {
             if (category === 'coffee') {
                 document.getElementById("subtitle").textContent = "Coffees";
-            }   else if (category === 'drinks') {
-                document.getElementById("subtitle").textContent = "Drinks";
+            }   else if (category === 'beverages') {
+                document.getElementById("subtitle").textContent = "Beverages";
             }   else if (category === 'sandwich') {
                 document.getElementById("subtitle").textContent = "Sandwiches";
             }   else if (category === 'pastry') {
@@ -123,6 +148,16 @@ function goBack() {
     }
 
     imageElement.style.display = "none"; // Hide the image
-    menuButtons.style.display = "block"; // Show the menu buttons
+    menuButtons.style.display = "flex"; // Show the menu buttons
     backButton.style.display = "none"; // Hide the back button
 }
+
+// Add this line at the bottom of your file
+// This ensures the function runs when the page loads
+document.addEventListener('DOMContentLoaded', loadPreferredLanguage);
+
+// Add event listener for page load
+window.onload = function() {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+};

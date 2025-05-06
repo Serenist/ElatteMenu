@@ -8,16 +8,31 @@
   <!-- Add Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* Update body background with a warmer gradient */
+    html {
+        overflow-x: hidden;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
     body {
       margin: 0;
+      padding: 20px;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #ffe8d6 0%, #f5e6e8 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
-      min-height: 100vh;
+      min-height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      position: absolute;
+      overflow-y: auto;
+      overflow-x: hidden;
+      left: 0;
+      top: 0;
     }
 
     /* Add subtle coffee-themed background pattern */
@@ -120,7 +135,7 @@
     }
 
     .header-container::before {
-      top: 85px;
+      top: 150px;
     }
 
     .header-container::after {
@@ -131,9 +146,8 @@
     .menu-button {
       width: 100%;
       max-width: 400px;
-      padding: 20px;
-      margin: 15px 0;
-      font-size: 1.2rem;
+      padding: clamp(12px, 2.5vh, 20px);
+      font-size: clamp(14px, 2.5vw, 18px);
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #fff5e6 0%, #fff9f0 100%);
       color: #6B4423;
@@ -145,7 +159,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
     }
 
     .menu-button:hover {
@@ -156,21 +169,27 @@
     }
 
     .menu-image {
-      margin-top: 20px;
-      width: 95vw;
+      width: 90%;
+      max-width: 95vw;
       height: auto;
+      margin: 20px auto;
+      margin-top: 20px;
       max-height: 80vh;
       object-fit: contain;
       display: none;
       border-radius: 20px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      z-index: 1;  /* Higher z-index than coffee cup */
+      margin-bottom: 150px;  /* Increased bottom margin to make space for coffee cup */
+      position: relative;
+      background: rgba(255, 255, 255, 0.98);  /* Added slight background to ensure image is visible */
     }
 
     /* Update back button */
     .back-button {
       display: none;
       position: fixed;
-      top: 0px;
+      top: 90px;
       left: 20px;
       padding: 15px;
       font-size: 24px;
@@ -242,19 +261,27 @@
 
     #menu-buttons {
       animation: fadeIn 0.6s ease-out;
-      width: 100%;
+      width: 90%;
+      max-width: 400px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: clamp(10px, 3vh, 30px);
+      box-sizing: border-box;
+      margin: 0 auto;
+      gap: clamp(4px, 6vh, 60px); /* This will be very obvious! */
+      padding-bottom: 120px; /* Added padding to prevent overlap with coffee cup */
+      z-index: 1000; /* Ensure menu buttons are above coffee cup */
     }
 
     .coffee-cup {
       position: fixed;
-      bottom: 10px;
+      bottom: 15px;
       left: 20px;
       width: 100px;
       height: 100px;
       filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+      z-index: 0;  /* Lower z-index so menu image appears above */
     }
 
     .coffee-cup img {
@@ -266,7 +293,7 @@
     .vapour {
     position: absolute;
     display: flex;
-    z-index: 1;
+    z-index: 1001;  /* Higher than coffee cup to ensure vapor shows above it */
     padding: 0 8px;    /* Reduced padding for tighter vapor */
     justify-content: center;
     bottom: 45px;
@@ -309,6 +336,25 @@
         opacity: 0;
     }
 }
+
+@media (max-height: 500px) {
+  #menu-buttons {
+    gap: 2px;
+  }
+}
+
+
+    @media screen and (max-height: 750px) {
+      
+      .menu-image {
+        margin-bottom: 80px;  /* Add space for coffee cup on small screens */
+      }
+
+      #menu-buttons {
+    padding-bottom: 160px;
+    gap: clamp(4px, 2vh, 20px);
+  }
+    }
   </style>
 </head>
 <body>
@@ -319,7 +365,7 @@
 
   <div id="menu-buttons">
     <button class="menu-button" id="coffee" onclick="showImage('coffee')">☕ Καφεδες</button>
-    <button class="menu-button" id="drinks" onclick="showImage('drinks')">🥤 Αναψυκτικά</button>
+    <button class="menu-button" id="beverages" onclick="showImage('beverages')">🥤 Αναψυκτικά</button>
     <button class="menu-button" id="sandwich" onclick="showImage('sandwich')">🥪 Σάντουιτς</button>
     <button class="menu-button" id="pastry" onclick="showImage('pastry')">🥐 Σφολιάτες</button>
   </div>
