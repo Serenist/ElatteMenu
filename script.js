@@ -134,6 +134,7 @@ function showImage(category) {
     }
 }
 
+// Modify the goBack function to also push a history state
 function goBack() {
     const imageElement = document.getElementById("menu-image");
     const menuButtons = document.getElementById("menu-buttons");
@@ -150,6 +151,9 @@ function goBack() {
     imageElement.style.display = "none"; // Hide the image
     menuButtons.style.display = "flex"; // Show the menu buttons
     backButton.style.display = "none"; // Hide the back button
+
+    // Push a new state to the history stack
+    history.pushState(null, '', 'https://serenist.github.io/ElatteMenu/'); // Replace '/' with the actual home page URL if needed
 }
 
 // Add this line at the bottom of your file
@@ -171,3 +175,9 @@ function setViewportHeight() {
 // Set the viewport height on load and resize
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('load', setViewportHeight);
+
+// Add event listener for the browser's back button or back gesture
+window.addEventListener('popstate', function (event) {
+    // Redirect to the home page of the website
+    window.location.href = 'https://serenist.github.io/ElatteMenu/'; // Replace '/' with the actual home page URL if needed
+});
