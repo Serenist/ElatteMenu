@@ -34,6 +34,40 @@
       opacity: 0.5;
     }
 
+    .coffee-decoration {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    opacity: 0.8;
+    background-image: url("../coffee-bean.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+    animation: floatBean 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;  /* Changed timing and easing */
+    transform-origin: center center;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+    will-change: transform; /* Optimize animation performance */
+    }
+
+    @keyframes floatBean {
+    0% { 
+        transform: translate(0, 0) rotate(0deg) scale(1); 
+    }
+    25% { 
+        transform: translate(50px, -30px) rotate(90deg) scale(1.05); 
+    }
+    50% { 
+        transform: translate(0, 50px) rotate(180deg) scale(1); 
+    }
+    75% { 
+        transform: translate(-50px, -30px) rotate(270deg) scale(1.05); 
+    }
+    100% { 
+        transform: translate(0, 0) rotate(360deg) scale(1); 
+    }
+}
+
     /* Update header container with a coffee-themed gradient */
     .header-container {
       width: 100%;
@@ -42,7 +76,7 @@
       background: linear-gradient(135deg, rgba(255,248,240,0.95) 0%, rgba(255,241,230,0.85) 100%);
       backdrop-filter: blur(10px);
       border-radius: 0 0 30px 30px;
-      box-shadow: 0 4px 30px rgba(139, 69, 19, 0.1);
+      box-shadow: 0 4px 30px rgba(93, 139, 19, 0.1);
       animation: fadeIn 0.8s ease-out;
     }
 
@@ -200,6 +234,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(10px, 10px) rotate(180deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
     #menu-buttons {
       animation: fadeIn 0.6s ease-out;
       width: 100%;
@@ -207,6 +247,68 @@
       flex-direction: column;
       align-items: center;
     }
+
+    .coffee-cup {
+      position: fixed;
+      bottom: 10px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    }
+
+    .coffee-cup img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .vapour {
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    padding: 0 8px;    /* Reduced padding for tighter vapor */
+    justify-content: center;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.3);  /* Scaled down more */
+}
+
+.vapour span {
+    position: relative;
+    bottom: 20px;
+    display: block;
+    margin: 0 1px;
+    min-width: 3px;     /* Slightly thinner lines */
+    height: 45px;       /* Shorter height */
+    background: rgba(255, 255, 255, 0.95);  /* Much more opaque white */
+    border-radius: 50%;
+    animation: steam 3s linear infinite;  /* Faster animation */
+    opacity: 0;
+    filter: blur(2px);  /* Less blur for sharper appearance */
+    animation-delay: calc(var(--v) * -0.3s);  /* Faster delay between spans */
+}
+
+@keyframes steam {
+    0% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.9;   /* Much higher opacity */
+    }
+    50% {
+        transform: translateY(-35px) scaleX(2);  /* Reduced height and scale */
+        opacity: 0.7;   /* Maintains visibility longer */
+    }
+    95% {
+        opacity: 0.3;   /* Fades out more slowly */
+    }
+    100% {
+        transform: translateY(-70px) scaleX(3);  /* Reduced maximum height */
+        opacity: 0;
+    }
+}
   </style>
 </head>
 <body>
@@ -236,9 +338,45 @@
     </button>
   </div>
 
+  <div class="coffee-cup">
+    <img src="../coffee_cup.png" alt="Coffee Cup">
+    <div class="vapour">
+      <span style="--v:1;"></span>
+      <span style="--v:2;"></span>
+      <span style="--v:5;"></span>
+      <span style="--v:4;"></span>
+      <span style="--v:6;"></span>
+      <span style="--v:19;"></span>
+      <span style="--v:7;"></span>
+      <span style="--v:8;"></span>
+      <span style="--v:9;"></span>
+      <span style="--v:10;"></span>
+      <span style="--v:11;"></span>
+      <span style="--v:18;"></span>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', loadPreferredLanguage);
+
+    // Create coffee bean decorations
+    for (let i = 0; i < 8; i++) {
+        const bean = document.createElement('div');
+        bean.className = 'coffee-decoration';
+        
+        // Set initial position and transform
+        const left = 10 + Math.random() * 80;
+        const top = 10 + Math.random() * 80;
+        
+        bean.style.cssText = `
+            left: ${left}vw;
+            top: ${top}vh;
+            animation-delay: -${Math.random() * 15}s;
+        `;
+        
+        document.body.appendChild(bean);
+    }
   </script>
 </body>
 </html>
