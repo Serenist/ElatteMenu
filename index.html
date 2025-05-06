@@ -260,17 +260,16 @@
     }
 
     #menu-buttons {
-      animation: fadeIn 0.6s ease-out;
-      width: 90%;
-      max-width: 400px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: clamp(10px, 3vh, 30px);
+      gap: clamp(8px, 4vh, 40px); /* Responsive gap */
+      padding-bottom: calc(120px + var(--vh, 1vh) * 10); /* Dynamic padding */
+      animation: fadeIn 0.6s ease-out;
+      width: 90%;
+      max-width: 400px;
       box-sizing: border-box;
       margin: 0 auto;
-      gap: clamp(4px, 6vh, 60px); /* This will be very obvious! */
-      padding-bottom: calc(120px + var(--vh, 1vh) * 10);
       z-index: 1000; /* Ensure menu buttons are above coffee cup */
     }
 
@@ -343,6 +342,12 @@
   }
 }
 
+@media (max-height: 600px) {
+  #menu-buttons {
+    gap: clamp(4px, 2vh, 20px); /* Smaller gap for short screens */
+    padding-bottom: calc(160px + var(--vh, 1vh) * 5); /* Extra padding */
+  }
+}
 
     @media screen and (max-height: 750px) {
       
