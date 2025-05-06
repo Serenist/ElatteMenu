@@ -153,7 +153,7 @@ function goBack() {
     backButton.style.display = "none"; // Hide the back button
 
     // Push a new state to the history stack
-    history.pushState(null, '', 'https://serenist.github.io/ElatteMenu/'); // Replace '/' with the actual home page URL if needed
+    history.pushState(null, '', 'https://serenist.github.io/ElatteMenu/index.html'); // Replace '/' with the actual home page URL if needed
 }
 
 // Add this line at the bottom of your file
@@ -179,5 +179,5 @@ window.addEventListener('load', setViewportHeight);
 // Add event listener for the browser's back button or back gesture
 window.addEventListener('popstate', function (event) {
     // Redirect to the home page of the website
-    window.location.href = 'https://serenist.github.io/ElatteMenu/'; // Replace '/' with the actual home page URL if needed
+    window.location.href = 'https://serenist.github.io/ElatteMenu/index.html'; // Replace '/' with the actual home page URL if needed
 });
