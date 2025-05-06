@@ -161,3 +161,13 @@ window.onload = function() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 };
+
+// Add viewport height adjustment function
+function setViewportHeight() {
+    const vh = window.innerHeight * 0.01; // 1% of the viewport height
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the viewport height on load and resize
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('load', setViewportHeight);

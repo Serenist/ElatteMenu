@@ -270,7 +270,7 @@
       box-sizing: border-box;
       margin: 0 auto;
       gap: clamp(4px, 6vh, 60px); /* This will be very obvious! */
-      padding-bottom: calc(120px + env(safe-area-inset-bottom)); /* Add dynamic padding */
+      padding-bottom: calc(120px + var(--vh, 1vh) * 10); /* Add dynamic padding */
       z-index: 1000; /* Ensure menu buttons are above coffee cup */
     }
 
