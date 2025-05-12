@@ -174,7 +174,7 @@
       height: auto;
       margin: 20px auto;
       margin-top: 20px;
-      max-height: 80vh;
+      max-height: calc(var(--vh, 1vh) * 60); /* or whatever fits your layout */
       object-fit: contain;
       display: none;
       border-radius: 20px;
@@ -266,6 +266,8 @@
       align-items: center;
       gap: clamp(8px, 4vh, 40px); /* Responsive gap */
       padding-bottom: 160px; /* Add enough space for fixed elements */
+      max-height: calc(var(--vh, 1vh) * 100 - 200px); /* adjust 200px as needed for header/footer */
+      overflow-y: auto;
     }
 
     .coffee-cup {
