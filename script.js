@@ -166,15 +166,23 @@ window.onload = function() {
     document.body.scrollTop = 0;
 };
 
-// Add viewport height adjustment function
 function setViewportHeight() {
-    const vh = window.innerHeight * 0.01; // 1% of the viewport height
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    if (window.visualViewport) {
+        const vh = window.visualViewport.height * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    } else {
+        // Fallback for browsers that don't support visualViewport
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
 }
 
-// Set the viewport height on load and resize
+// Update on resize, load, and viewport changes
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('load', setViewportHeight);
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setViewportHeight);
+}
 
 window.addEventListener('popstate', function (event) {
     if (event.state && event.state.page === 'home') {

@@ -25,14 +25,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100%;
+      min-height: calc(var(--vh, 1vh) * 100); /* Use dynamic vh */
       width: 100%;
       box-sizing: border-box;
-      position: absolute;
-      overflow-y: auto;
+      overflow-y: auto; /* Remove absolute positioning */
       overflow-x: hidden;
-      left: 0;
-      top: 0;
+      /* Remove position: absolute, left: 0, top: 0 */
     }
 
     /* Add subtle coffee-themed background pattern */
@@ -86,8 +84,9 @@
     /* Update header container with a coffee-themed gradient */
     .header-container {
       width: 100%;
-      padding: 30px 20px;
-      margin-bottom: 30px;
+      position: relative;
+      padding: calc(var(--vh, 1vh) * 4) 20px 0 20px; /* Responsive top padding */
+      margin-bottom: calc(var(--vh, 1vh) * 2);
       background: linear-gradient(135deg, rgba(255,248,240,0.95) 0%, rgba(255,241,230,0.85) 100%);
       backdrop-filter: blur(10px);
       border-radius: 0 0 30px 30px;
@@ -109,6 +108,7 @@
       font-size: 2.8rem;
       font-weight: 600;
       margin-bottom: 5px;
+      top: -20px;
       background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -120,27 +120,9 @@
       font-weight: 400;
       color: #34495e;
       opacity: 0.9;
+      top: -15px;
     }
-
-    /* Update decorative elements */
-    .header-container::before,
-    .header-container::after {
-      content: '';
-      position: absolute;
-      width: 100px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #8B4513, transparent);
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .header-container::before {
-      top: 150px;
-    }
-
-    .header-container::after {
-      bottom: 20px;
-    }
+    
 
     /* Update menu buttons with warm colors */
     .menu-button {
@@ -174,13 +156,13 @@
       height: auto;
       margin: 20px auto;
       margin-top: 20px;
-      max-height: calc(var(--vh, 1vh) * 60); /* or whatever fits your layout */
+      max-height: calc(var(--vh, 1vh) * 60); /* Responsive max height */
       object-fit: contain;
       display: none;
       border-radius: 20px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
       z-index: 1;  /* Higher z-index than coffee cup */
-      margin-bottom: 150px;  /* Increased bottom margin to make space for coffee cup */
+      margin-bottom: calc(var(--vh, 1vh) * 10); /* Responsive bottom margin */
       position: relative;
       background: rgba(255, 255, 255, 0.98);  /* Added slight background to ensure image is visible */
     }
@@ -214,7 +196,7 @@
 
     /* Update language switcher */
     .language-switch {
-      position: fixed;
+      position: absolute;
       bottom: 15px;
       right: 20px;
       display: flex;
@@ -264,14 +246,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(8px, 4vh, 40px); /* Responsive gap */
-      padding-bottom: 160px; /* Add enough space for fixed elements */
-      max-height: calc(var(--vh, 1vh) * 100 - 200px); /* adjust 200px as needed for header/footer */
+      gap: clamp(8px, 6vh, 60px); /* Responsive gap */
       overflow-y: auto;
+      max-height: calc(var(--vh, 1vh) * 100 - 200px);
+      padding-bottom: calc(120px + var(--vh, 1vh) * 10);
     }
 
     .coffee-cup {
-      position: fixed;
+      position: absolute;
       bottom: 15px;
       left: 20px;
       width: 100px;
@@ -346,17 +328,20 @@
   }
 }
 
-    @media screen and (max-height: 750px) {
-      
-      .menu-image {
-        margin-bottom: 80px;  /* Add space for coffee cup on small screens */
-      }
+@media screen and (max-height: 700px) {
+  .menu-image {
+    margin-bottom: 80px;  /* Add space for coffee cup on small screens */
+  }
 
-      #menu-buttons {
+  #menu-buttons {
     padding-bottom: 160px;
     gap: clamp(4px, 2vh, 20px);
   }
+
+  .language-button {
+    bottom: 110px; /* Move language switch higher to avoid overlap */
     }
+}
   </style>
 </head>
 <body>
