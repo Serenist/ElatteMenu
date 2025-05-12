@@ -156,7 +156,7 @@ function goBack() {
     backButton.style.display = "none"; // Hide the back button
 
     // Push a new state to the history stack
-    history.pushState({ page: 'home' }, '', ''); // Push a custom state
+    history.back(); // Go back in history stack
 }
 
 // Add this line at the bottom of your file
