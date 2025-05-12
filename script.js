@@ -104,6 +104,9 @@ function showImage(category) {
     const backButton = document.getElementById("back-button");
 
     if (imageLinks[category]) {
+      // Push a new state for the menu view
+      history.pushState({ page: category }, '', '');
+
       imageElement.src = imageLinks[category]; // Set the image source
       imageElement.style.display = "block"; // Show the image
       menuButtons.style.display = "none"; // Hide the menu buttons
