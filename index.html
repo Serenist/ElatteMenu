@@ -12,7 +12,7 @@
       overflow-x: hidden;
       height: auto; /* Allow content to define height */
       position: relative; /* Remove fixed positioning */
-      min-height: calc(var(--vh, 1vh) * 100);
+      min-height: 100%;
       width: 100%;
       margin: 0;
       padding: 0;
@@ -125,8 +125,6 @@
       top: -15px;
     }
     
-
-    /* Update menu buttons with warm colors */
     .menu-button {
       width: 100%;
       max-width: 400px;
@@ -150,6 +148,18 @@
       box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
       background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
       border-color: rgba(139, 69, 19, 0.2);
+    }
+
+    #menu-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      gap: clamp(4px, 6vh, 60px); /* Responsive gap */
+      overflow-y: auto;
+      max-height: calc(var(--vh, 1vh) * 100 - 100px);
+      padding-bottom: calc(120px + var(--vh, 1vh) * 10);
+      padding-top: calc(50px + var(--vh, 1vh));
     }
 
     .menu-image {
@@ -198,8 +208,8 @@
 
     /* Update language switcher */
     .language-switch {
-      position: absolute;
-      bottom: calc(var(--vh, 1vh) * 5); /* Adjust dynamically based on viewport height */
+      position: fixed;
+      bottom: calc(var(--vh, 1vh) * 3); /* Adjust dynamically based on viewport height */
       right: 20px;
       display: flex;
       gap: 10px;
@@ -222,8 +232,8 @@
     }
 
     .coffee-cup {
-      position: absolute;
-      bottom: calc(var(--vh, 1vh) * 3); /* Adjust dynamically based on viewport height */
+      position: fixed;
+      bottom: calc(var(--vh, 1vh) * 1); /* Adjust dynamically based on viewport height */
       left: 20px;
       width: 100px;
       height: 100px;
@@ -259,18 +269,6 @@
       50% { transform: translate(10px, 10px) rotate(180deg); }
       100% { transform: translate(0, 0) rotate(360deg); }
     }
-
-    #menu-buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(8px, 6vh, 60px); /* Responsive gap */
-      overflow-y: auto;
-      max-height: calc(var(--vh, 1vh) * 100 - 200px);
-      padding-bottom: calc(120px + var(--vh, 1vh) * 10);
-    }
-
-    
 
     .vapour {
     position: absolute;
@@ -332,18 +330,25 @@
   }
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 800px) {
   .menu-image {
-    margin-bottom: 80px;  /* Add space for coffee cup on small screens */
+    margin-bottom: 160px;  /* Add space for coffee cup on small screens */
   }
 
-  #menu-buttons {
+  .menu-buttons {
     padding-bottom: 160px;
-    gap: clamp(4px, 2vh, 20px);
+    /*gap: clamp(4px, 2vh, 20px);*/
+    position: absolute;
   }
 
-  .language-button {
-    bottom: 110px; /* Move language switch higher to avoid overlap */
+  .coffee-cup {
+    position: absolute;
+    bottom: 80px;
+  }
+
+  .language-switch {
+    bottom: 90px; /* Move language switch higher to avoid overlap */
+    position: absolute;
     }
 }
   </style>
