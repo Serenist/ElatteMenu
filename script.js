@@ -153,7 +153,7 @@ function goBack() {
     backButton.style.display = "none"; // Hide the back button
 
     // Push a new state to the history stack
-    history.pushState(null, '', 'https://serenist.github.io/ElatteMenu/index.html'); // Replace '/' with the actual home page URL if needed
+    history.pushState({ page: 'home' }, '', ''); // Push a custom state
 }
 
 // Add this line at the bottom of your file
@@ -176,8 +176,31 @@ function setViewportHeight() {
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('load', setViewportHeight);
 
-// Add event listener for the browser's back button or back gesture
 window.addEventListener('popstate', function (event) {
-    // Redirect to the home page of the website
-    window.location.href = 'https://serenist.github.io/ElatteMenu/index.html'; // Replace '/' with the actual home page URL if needed
+    if (event.state && event.state.page === 'home') {
+        // Reset the app to the home state
+        const imageElement = document.getElementById("menu-image");
+        const menuButtons = document.getElementById("menu-buttons");
+        const backButton = document.getElementById("back-button");
+
+        imageElement.style.display = "none"; // Hide the image
+        menuButtons.style.display = "flex"; // Show the menu buttons
+        backButton.style.display = "none"; // Hide the back button
+
+        // Reset subtitle to default based on language preference
+        const preferred = getCookie('preferred_language');
+        if (preferred === 'greek') {
+            document.getElementById("subtitle").textContent = translations.greek.title;
+        } else {
+            document.getElementById("subtitle").textContent = translations.english.title;
+        }
+    } else {
+        // If no state or not "home", allow the default back behavior
+        window.location.href = 'https://serenist.github.io/ElatteMenu/'; // Redirect to home page
+    }
+});
+
+// Push an initial state when the page loads
+window.addEventListener('load', function () {
+    history.replaceState({ page: 'home' }, '', ''); // Replace the current state with a custom one
 });
