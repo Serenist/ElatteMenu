@@ -177,11 +177,24 @@ function setViewportHeight() {
     }
 }
 
+function updateScreenClass() {
+  const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  document.documentElement.style.setProperty('--vh', `${vh * 0.01}px`);
+  document.body.classList.remove('small-screen', 'medium-screen', 'large-screen');
+  if (vh <= 500) {
+    document.body.classList.add('small-screen');
+  } else if (vh <= 720) {
+    document.body.classList.add('medium-screen');
+  } else {
+    document.body.classList.add('large-screen');
+  }
+}
+
 // Update on resize, load, and viewport changes
-window.addEventListener('resize', setViewportHeight);
-window.addEventListener('load', setViewportHeight);
+window.addEventListener('resize', updateScreenClass);
+window.addEventListener('load', updateScreenClass);
 if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', setViewportHeight);
+    window.visualViewport.addEventListener('resize', updateScreenClass);
 }
 
 window.addEventListener('popstate', function (event) {

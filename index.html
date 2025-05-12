@@ -317,52 +317,54 @@
     }
 }
 
-@media (max-height: 500px) {
-  #menu-buttons {
-    gap: 2px;
-  }
+/* Small screens (e.g. address bar visible) */
+body.small-screen .menu-image {
+  margin-bottom: 80px;
+}
+body.small-screen #menu-buttons {
+  gap: 2px;
+  padding-bottom: 80px;
+}
+body.small-screen .coffee-cup {
+  bottom: 40px;
+  position: absolute;
+}
+body.small-screen .language-switch {
+  bottom: 50px;
+  position: absolute;
 }
 
-@media (max-height: 720px) {
- .menu-image {
-    margin-bottom: 160px;  /* Add space for coffee cup on small screens */
-  }
-
-  #menu-buttons {
-    gap: 10px;
-  }
-
-  .coffee-cup {
-    position: absolute;
-    bottom: 80px;
-  }
-
-  .language-switch {
-    bottom: 90px; /* Move language switch higher to avoid overlap */
-    position: absolute;
-    }
+/* Medium screens */
+body.medium-screen .menu-image {
+  margin-bottom: 120px;
+}
+body.medium-screen #menu-buttons {
+  gap: 10px;
+  padding-bottom: 120px;
+}
+body.medium-screen .coffee-cup {
+  bottom: 30px;
+  position: absolute;
+}
+body.medium-screen .language-switch {
+  bottom: 40px;
+  position: absolute;
 }
 
-@media screen and (max-height: 800px) {
-  .menu-image {
-    margin-bottom: 160px;  /* Add space for coffee cup on small screens */
-  }
-    
-  .menu-buttons {
-    padding-bottom: 160px;
-    /*gap: clamp(4px, 2vh, 20px);*/
-    position: absolute;
-  }
-
-  .coffee-cup {
-    position: absolute;
-    bottom: 80px;
-  }
-
-  .language-switch {
-    bottom: 90px; /* Move language switch higher to avoid overlap */
-    position: absolute;
-    }
+/* Large screens (default, can be omitted if your base styles are for large) */
+body.large-screen .menu-image {
+  margin-bottom: 160px;
+}
+body.large-screen #menu-buttons {
+  padding-bottom: 160px;
+}
+body.large-screen .coffee-cup {
+  bottom: 50px;
+  position: absolute;
+}
+body.large-screen .language-switch {
+  bottom: 70px;
+  position: absolute;
 }
   </style>
 </head>
