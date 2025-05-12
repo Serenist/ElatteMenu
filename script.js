@@ -166,20 +166,9 @@ window.onload = function() {
     document.body.scrollTop = 0;
 };
 
-function setViewportHeight() {
-    if (window.visualViewport) {
-        const vh = window.visualViewport.height * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    } else {
-        // Fallback for browsers that don't support visualViewport
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-}
-
 function updateScreenClass() {
   const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  document.documentElement.style.setProperty('--vh', `${vh * 0.01}px`);
+  //document.documentElement.style.setProperty('--vh', `${vh * 0.01}px`);
   document.body.classList.remove('small-screen', 'medium-screen', 'large-screen');
   if (vh <= 500) {
     document.body.classList.add('small-screen');
